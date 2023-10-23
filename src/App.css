@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding: 0 60px;
 }
 
 .App-logo {
@@ -36,3 +37,71 @@
     transform: rotate(360deg);
   }
 }
+
+body{
+  background-image: url(./imgs/landscape.jpg);
+  background-size: cover;
+  height: 100vh;
+}
+
+.header {
+  font-size: 5rem;
+  color: black;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgba(221, 221, 221, 0.8);
+  border-radius: 10px;
+  width: 40vw;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.add-input-container {
+  width: 400px;
+  height: 20px;
+  padding: 0 60px;
+  margin: auto;
+}
+
+.add-input {
+  margin-top: 20px;
+  width: 80%;
+  height: 100%;
+}
+
+.button {
+  background-color: white;
+  border-radius: 10px;
+  translate: all 300ms ease-in;
+  margin: 5px;
+}
+
+.button:hover {
+  transform: scale(1.2);
+}
+
+.green-background {
+  background-color: green;
+}
+
+.todo-list-container {
+  height: full;
+  padding-top: 50px;
+  & > div{
+    display: flex;
+    justify-content: space-between;
+    width: 21vw;
+    margin: 10px auto;
+    background-color: rgba(221, 221, 221, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+  }
+}
+
+.input-container{
+  margin: 5px;
+}
+
