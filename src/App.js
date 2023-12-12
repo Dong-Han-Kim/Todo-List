@@ -1,7 +1,7 @@
-import './App.css';
-import { useState, useEffect } from 'react';
-import {v4 as uuid} from 'uuid';
-import { RadioGroup } from './components/RadioGroup';
+import "./App.css";
+import { useState, useEffect } from "react";
+import { v4 as uuid } from "uuid";
+import { RadioGroup } from "./components/RadioGroup";
 import { Select } from "./components/Select";
 import { TodoItem } from "./components/TodoItem";
 import { Button } from "./components/Button";
@@ -13,6 +13,19 @@ function App() {
   const [sort, setSort] = useState("NONE");
   const [filter, setFilter] = useState("ALL");
   const [updateTargetId, setUpdateTargetId] = useState("");
+  const [clock, setClock] = useState("00시 00분");
+
+  useEffect(() => {
+    const Timer = setInterval(() => {
+      let time = new Date();
+      setClock(`${time.getHours()}시 ${time.getMinutes()}분`);
+    }, 1000);
+
+    return () => {
+      clearInterval(Timer);
+      console.log("un");
+    };
+  }, []);
 
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem("todos"));
@@ -35,45 +48,46 @@ function App() {
       if (sort === "CONTENT") return a.content.localeCompare(b.content);
     });
 
-    const updateTodos = (nextTodos) => {
-      localStorage.setItem("todos", JSON.stringify(nextTodos));
-      setTodos(nextTodos);
-    };
+  const updateTodos = (nextTodos) => {
+    localStorage.setItem("todos", JSON.stringify(nextTodos));
+    setTodos(nextTodos);
+  };
 
   return (
     <div className="App">
-      <h1 className='header'>ToDo List</h1>
-      <div className='filter-container'>
+      <h1 className="header">ToDo List</h1>
+      <h1>{clock}</h1>
+      <div className="filter-container">
         <div>
           <span>필터: </span>
-          <RadioGroup 
-            values = {["ALL", "DONE", "NOT_DONE"]} 
-            labels = {["전체", "완료", "미완료"]}
-            value = {filter}
-            onChange = {(e) => setFilter(e.target.value)}
+          <RadioGroup
+            values={["ALL", "DONE", "NOT_DONE"]}
+            labels={["전체", "완료", "미완료"]}
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
           />
         </div>
         <div>
           <span htmlFor="sort">정렬 : </span>
           <Select
-            values = {["NONE", "CREATED_AT", "CONTENT"]}
-            labels = {["생성순", "최신순", "가나다순"]}
-            value = {sort}
-            onChange = {(e) => setSort(e.target.value)}
+            values={["NONE", "CREATED_AT", "CONTENT"]}
+            labels={["생성순", "최신순", "가나다순"]}
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
           />
         </div>
       </div>
-      
+
       {/* 
         SPA(Single Page Application), CSR(client Side Rendering  <-> SSR, Server side rendering)
         client가 dom그리기를 제어한다.
       */}
       <form
-        className='add-input-container'
+        className="add-input-container"
         onSubmit={(e) => {
           // form은 기본적으로 새로고침을 trigger, why? 새로운 html파일을 내려받아야하니까
           e.preventDefault();
-          if(!inputValue) return;
+          if (!inputValue) return;
           const newTodo = {
             id: uuid(),
             content: inputValue,
@@ -82,20 +96,19 @@ function App() {
           };
           updateTodos([...todos, newTodo]);
           setInputValue("");
-        }}
-      >
+        }}>
         <input
-          className='add-input'
+          className="add-input"
           value={inputValue}
           onChange={(e) => {
-            setInputValue(e.target.value); 
-          }} 
-          disabled = {isUpdateMode}
+            setInputValue(e.target.value);
+          }}
+          disabled={isUpdateMode}
         />
         <Button disabled={!inputValue || isUpdateMode}>{"ADD"}</Button>
       </form>
 
-      <div className='todo-list-container'>
+      <div className="todo-list-container">
         {computedTodos.map((todo) => (
           <TodoItem
             key={todo.id}
@@ -118,6 +131,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

@@ -38,7 +38,7 @@
   }
 }
 
-body{
+body {
   background-image: url(./imgs/landscape.jpg);
   background-size: cover;
   height: 100vh;
@@ -75,11 +75,13 @@ body{
 .button {
   background-color: white;
   border-radius: 10px;
-  translate: all 300ms ease-in;
+  translate: all 300ms ease-in-out;
   margin: 5px;
 }
 
 .button:hover {
+  border-color: black;
+  color: black;
   transform: scale(1.2);
 }
 
@@ -90,10 +92,10 @@ body{
 .todo-list-container {
   height: full;
   padding-top: 50px;
-  & > div{
+  & > div {
     display: flex;
     justify-content: space-between;
-    width: 21vw;
+    width: 30vw;
     margin: 10px auto;
     background-color: rgba(221, 221, 221, 0.5);
     border-radius: 10px;
@@ -101,7 +103,6 @@ body{
   }
 }
 
-.input-container{
+.input-container {
   margin: 5px;
 }
-
