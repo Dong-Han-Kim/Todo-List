@@ -1,6 +1,3 @@
 # Todo-List
-
-## 설명
-
-TodoList를 만들어보자!!!
-완성
+***
+React와 로컬 스토리지를 활용한 todo list입니다.
